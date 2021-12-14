@@ -1,0 +1,68 @@
+
+<button (click)="buttonClick()">click</button>
+<ngx-datatable
+        #myTable
+   
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [rows]='rows'
+        (page)="onPage($event)"
+        [columns]="columns">
+        
+        <!-- Row Detail Template -->
+        <ngx-datatable-row-detail 
+          [rowHeight]="100" 
+          #myDetailRow 
+          (toggle)="onDetailToggle($event)">
+          <ng-template 
+            let-row="row" 
+            let-expanded="expanded" 
+            ngx-datatable-row-detail-template>
+            <div style="padding-left:35px;">
+              =====Open Detail=====
+               <div>Name: {{row.name}}</div> 
+               <div>Gender:{{row.gender}}</div>
+            </div>
+          </ng-template>
+        </ngx-datatable-row-detail>
+
+        <!-- Column Templates -->
+         <ngx-datatable-column
+          [width]="50"
+          [resizeable]="false" 
+          [sortable]="false" 
+          [draggable]="false"
+          [canAutoResize]="false"
+          [frozenLeft]="true">
+          <ng-template 
+            let-row="row" 
+            let-rowIndex="rowIndex" 
+            let-expanded="expanded" 
+            ngx-datatable-cell-template>
+            <a
+             *ngIf="isCheck"
+              href="javascript:void(0)"
+              [class.datatable-icon-right]="!expanded"
+              [class.datatable-icon-down]="expanded"
+              title="Expand/Collapse Row"
+              (click)="toggleExpandRow(row)">open
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Name"></ngx-datatable-column>
+          <ngx-datatable-column 
+            *ngFor="let col of meinecolumnsleer; let i = index" 
+            [name]="col">
+               <ng-template  let-row="row" ngx-datatable-cell-template>
+                            <span>
+                             {{ row?.gruppen[i]['menge']}}  
+                            </span>
+                        </ng-template>
+          </ngx-datatable-column>
+        <ngx-datatable-column name="Gender"></ngx-datatable-column>
+        <ngx-datatable-column name="Age" ></ngx-datatable-column>
+      </ngx-datatable>
+
+      {{expanded | json}}
+      {{expandedId | json}}

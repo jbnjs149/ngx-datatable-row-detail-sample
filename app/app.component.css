@@ -1,0 +1,13 @@
+p {
+  font-family: Lato;
+}
+
+/deep/
+.datatable-body-row{
+  border-bottom:1px solid #000;
+}
+
+/deep/
+.datatable-row-detail{
+  background: rgb(134, 79, 79);
+}
